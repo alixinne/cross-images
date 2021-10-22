@@ -31,7 +31,7 @@ test_c_prog () {
       echo -e "\e[32mCompilation succeeded\e[0m" >&2
       mv "$DIR/$NAME" "$NAME-$TARGET_NAME"
     else
-      echo -e "\e[32mCompilation failed with code: $?\e[0m" >&2
+      echo -e "\e[31mCompilation failed with code: $?\e[0m" >&2
   fi
 
   # Cleanup
@@ -65,7 +65,7 @@ EOT
     echo -e "\e[32mCompilation succeeded\e[0m" >&2
     mv "$DIR/target/$TARGET/debug/$NAME" "$NAME-$TARGET_NAME"
   else
-    echo -e "\e[32mCompilation failed with code: $?\e[0m" >&2
+    echo -e "\e[31mCompilation failed with code: $?\e[0m" >&2
   fi
 
   # Cleanup
