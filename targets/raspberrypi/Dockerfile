@@ -119,9 +119,6 @@ RUN ln -s /opt/cross/lib/arm-linux-gnueabihf /lib \
     # Fix pyo3 looking for _sysconfig in PYO3_CROSS_LIB_DIR
     && ln -s /opt/cross/lib/python* /opt/cross/lib/arm-linux-gnueabihf
 
-# Add the corresponding Rust target
-RUN rustup target add arm-unknown-linux-gnueabihf
-
 # Set the cross-compiler for Rust's target
 ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc
 ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_AR=arm-linux-gnueabihf-ar
