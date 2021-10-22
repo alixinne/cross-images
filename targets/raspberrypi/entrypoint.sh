@@ -18,6 +18,15 @@ if [ "$ENABLE_PYO3" = "1" ]; then
   export RUSTFLAGS="-C link-arg=-L/opt/cross/lib/arm-linux-gnueabihf -C link-arg=-lexpat -C link-arg=-lz"
 fi
 
+RUST_TOOLCHAIN=""
+for DIR in /src /project; do
+  if [ -f "$DIR/rust-toolchain" ]; then
+    RUST_TOOLCHAIN="$(cat $DIR/rust-toolchain)"
+    rustup toolchain add "$RUST_TOOLCHAIN"
+    break
+  fi
+done
+
 scan_install_target () {
   NEXT_TARGET=0
   for ARG in "$@"; do
@@ -27,10 +36,10 @@ scan_install_target () {
       NEXT_TARGET=1
     elif [ "$NEXT_TARGET" = 1 ]; then
       NEXT_TARGET=0
-      if [ -f rust-toolchain ]; then
-        rustup target add "$ARG" --toolchain "$(cat rust-toolchain)"
-      else
+      if [ -z "$RUST_TOOLCHAIN" ]; then
         rustup target add "$ARG"
+      else
+        rustup target add "$ARG" --toolchain "$RUST_TOOLCHAIN"
       fi
     fi
   done
