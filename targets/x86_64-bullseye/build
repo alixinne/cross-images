@@ -1,0 +1,2 @@
+#!/bin/sh -eu
+$DOCKER build --cache-from $IMAGE_BASE:$TARGET -t $IMAGE_BASE:$TARGET .

@@ -17,17 +17,25 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Build the images
-        run: make images
-
-      - name: Test the images
-        run: make test
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Fetch cache
+        run: |
+          for TARGET in $(cd targets && echo *); do
+            docker pull $REGISTRY/$IMAGE_NAME:$TARGET-build || true
+            docker pull $REGISTRY/$IMAGE_NAME:$TARGET-target || true
+            docker pull $REGISTRY/$IMAGE_NAME:$TARGET || true
+          done
+
+      - name: Build the images
+        run: make images
+
+      - name: Test the images
+        run: make test
 
       - name: Push Docker images
         run: make push
