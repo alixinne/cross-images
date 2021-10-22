@@ -108,7 +108,8 @@ ENV PATH=/opt/cross/bin:${PATH}
 RUN DEBIAN_FRONTEND=noninteractive \
        apt-get update -qq \
     && apt-get install -q -y --no-install-recommends \
-          build-essential pkg-config ca-certificates python3 \
+          build-essential pkg-config ca-certificates \
+          git python3 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Deploy native dependencies
