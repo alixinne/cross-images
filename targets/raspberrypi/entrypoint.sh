@@ -18,10 +18,6 @@ if [ "$ENABLE_PYO3" = "1" ]; then
   export RUSTFLAGS="-C link-arg=-L/opt/cross/lib/arm-linux-gnueabihf -C link-arg=-lexpat -C link-arg=-lz"
 fi
 
-if [ "$@" = "" ]; then
-  exec /bin/bash
-else
-  exec "$@"
-fi
+exec "$@"
 
 # vim: ft=bash:et:ts=2:sw=2

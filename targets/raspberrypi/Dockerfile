@@ -120,6 +120,7 @@ ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_AR=arm-linux-gnueabihf-ar
 
 # Deploy entrypoint
 COPY entrypoint.sh /
+CMD ["/bin/bash"]
 ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /src
 
