@@ -17,15 +17,18 @@ test_c_prog () {
 
   # Deploy source
   echo "$SOURCE" >"$DIR/$NAME.c"
-  SOURCE_IN="/src/$NAME.c"
-  BINARY_OUT="/src/$NAME"
+
+  # Export parameters
+  export SOURCE_IN="/src/$NAME.c"
+  export BINARY_OUT="/src/$NAME"
+  export ENABLE_PYO3=${ENABLE_PYO3:-}
 
   # Run compilation
   rm -f "$NAME-$TARGET_NAME"
   if $DOCKER run -v "$DIR:/src:z" --rm -it \
-    -e ENABLE_PYO3=${ENABLE_PYO3:-} \
-    -e SOURCE_IN="$SOURCE_IN" \
-    -e BINARY_OUT="$BINARY_OUT" \
+    -e ENABLE_PYO3 \
+    -e SOURCE_IN \
+    -e BINARY_OUT \
     vtavernier/cross:$TARGET_NAME \
     /bin/bash -c "$COMMAND"; then
       echo -e "\e[32mCompilation succeeded\e[0m" >&2

@@ -99,10 +99,17 @@ RUN install_packages python3-dev libsqlite3-dev
 RUN ["cross-build-end"]
 
 # Create the final image for cross-compiling
-FROM docker.io/rust:bullseye
+FROM docker.io/debian:bullseye-slim
 
 # We want to access the cross-compilers directly
 ENV PATH=/opt/cross/bin:${PATH}
+
+# Fetch build dependencies
+RUN DEBIAN_FRONTEND=noninteractive \
+       apt-get update -qq \
+    && apt-get install -q -y --no-install-recommends \
+          build-essential pkg-config \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Deploy native dependencies
 COPY --from=target /usr/include /opt/cross/include
