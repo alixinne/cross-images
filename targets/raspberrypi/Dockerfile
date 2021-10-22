@@ -78,6 +78,14 @@ RUN cd /opt/cross-build/glibc-build \
     && make -j$(nproc) \
     && make install
 
+# Install the stripped version
+RUN cd /opt/cross-build/gcc-build \
+    && echo "#ifndef PATH_MAX\n#define PATH_MAX 4096\n#endif\n" >/opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp.hdr \
+    && mv /opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp /opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp.old \
+    && cat /opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp.hdr /opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp.old > /opt/cross-build/gcc-${GCC_VERSION}/libsanitizer/asan/asan_linux.cpp \
+    && make -j$(nproc) \
+    && make install-strip
+
 # Fetch native dependencies using the Balena images
 FROM docker.io/balenalib/raspberry-pi-debian:bullseye-build AS target
 
