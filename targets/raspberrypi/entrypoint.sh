@@ -13,6 +13,7 @@ if [ -z "$CPATH" ]; then
 fi
 
 if [ "$ENABLE_PYO3" = "1" ]; then
+  export PYO3_CROSS=1
   export PYO3_CROSS_PYTHON_VERSION=3.9
   export PYO3_CROSS_LIB_DIR=/opt/cross/lib/arm-linux-gnueabihf
   export RUSTFLAGS="-C link-arg=-L/opt/cross/lib/arm-linux-gnueabihf -C link-arg=-lexpat -C link-arg=-lz"
