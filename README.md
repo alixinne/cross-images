@@ -8,7 +8,7 @@ extra support needed for cross-compiling on unusual targets.
 
 Targets are defined in the [`targets`](targets/) folder. The currently defined targets are:
 
-* [`raspberrypi`](targets/raspberrypi): Raspberry Pi Zero/1
+* [`raspberrypi`](targets/raspberrypi): Raspberry Pi Zero/1 Raspbian Bullseye
 
   *Rationale: arm-linux-gnueabihf toolchains are now configured by default to
   use ARMv7, which is only supported by Raspberry Pi 2 and later. This builds a
@@ -69,7 +69,9 @@ make
 
 ## Testing the images
 
-See the [tests](tests/) folder.
+```
+make test
+```
 
 ## Author
 
