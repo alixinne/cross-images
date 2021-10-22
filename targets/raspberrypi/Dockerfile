@@ -128,8 +128,10 @@ RUN ln -s /opt/cross/lib/arm-linux-gnueabihf /lib \
     && ln -s /opt/cross/lib/python* /opt/cross/lib/arm-linux-gnueabihf
 
 # Set the cross-compiler for Rust's target
-ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc
-ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_AR=arm-linux-gnueabihf-ar
+ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc \
+    CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_AR=arm-linux-gnueabihf-ar \
+    CC_arm_unknown_linux_gnueabihf=arm-linux-gnueabihf-gcc \
+    CXX_arm_unknown_linux_gnueabihf=arm-linux-gnueabihf-g++
 
 # Deploy entrypoint
 COPY entrypoint.sh /
