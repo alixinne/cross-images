@@ -3,7 +3,7 @@ FROM docker.io/debian:bullseye-slim
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update -qq && apt-get install -y -q --no-install-recommends \
-    build-essential pkg-config \
+    build-essential pkg-config ca-certificates \
     python3-dev libsqlite3-dev pkg-config \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
