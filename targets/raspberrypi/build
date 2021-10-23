@@ -1,4 +1,4 @@
 #!/bin/sh -eu
-$DOCKER build --cache-from $IMAGE_BASE:$TARGET-build --target build -t $IMAGE_BASE:$TARGET-build .
-$DOCKER build --cache-from $IMAGE_BASE:$TARGET-target --target target -t $IMAGE_BASE:$TARGET-target .
-$DOCKER build --cache-from $IMAGE_BASE:$TARGET -t $IMAGE_BASE:$TARGET .
+$DOCKER build --cache-from $IMAGE_BASE:$TARGET-build --target build -t $REGISTRY/$IMAGE_BASE:$TARGET-build .
+$DOCKER build --cache-from $IMAGE_BASE:$TARGET-target --target target -t $REGISTRY/$IMAGE_BASE:$TARGET-target .
+$DOCKER build --cache-from $IMAGE_BASE:$TARGET -t $REGISTRY/$IMAGE_BASE:$TARGET .
