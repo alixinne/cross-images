@@ -33,14 +33,6 @@ jobs:
       - uses: satackey/action-docker-layer-caching@v0.0.11
         continue-on-error: true
 
-      - name: Fetch cache
-        run: |
-          for TARGET in $(cd targets && echo *); do
-            docker pull $REGISTRY/$IMAGE_NAME:$TARGET-build || true
-            docker pull $REGISTRY/$IMAGE_NAME:$TARGET-target || true
-            docker pull $REGISTRY/$IMAGE_NAME:$TARGET || true
-          done
-
       - name: Build the images
         run: make images
 
