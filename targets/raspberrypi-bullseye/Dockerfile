@@ -87,7 +87,11 @@ RUN cd /opt/cross-build/gcc-build \
     && make install-strip
 
 # Fetch native dependencies using the Balena images
+FROM docker.io/balenalib/raspberry-pi-debian:bullseye-build AS target-base
 FROM docker.io/balenalib/raspberry-pi-debian:bullseye-build AS target
+
+# See https://github.com/GoogleContainerTools/kaniko/issues/1556#issuecomment-1475814975
+COPY --from=target-base /bin/sh /bin/sh.real
 
 ENV QEMU_EXECVE=1
 
