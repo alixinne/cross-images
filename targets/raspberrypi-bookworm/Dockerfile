@@ -2,9 +2,9 @@
 FROM docker.io/debian:bookworm-slim AS build
 
 ARG GCC_MIRROR=https://ftpmirror.gnu.org/
-ARG BINUTILS_VERSION=2.35.2
-ARG GCC_VERSION=10.2.0
-ARG GLIBC_VERSION=2.31
+ARG BINUTILS_VERSION=2.40
+ARG GCC_VERSION=12.2.0
+ARG GLIBC_VERSION=2.36
 
 # Fetch build dependencies
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && apt-get install -q -y --no-install-recommends \
           build-essential wget git xz-utils \
           gawk bison python3 rsync ca-certificates \
+          file texinfo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Fetch sources
@@ -34,7 +35,7 @@ RUN mkdir -p /opt/cross-build \
     && ./contrib/download_prerequisites \
     && echo "Extracting linux kernel headers" \
     && cd /opt/cross-build \
-    && wget -q -O linux.tar.gz https://github.com/raspberrypi/linux/archive/refs/heads/rpi-5.10.y.tar.gz \
+    && wget -q -O linux.tar.gz https://github.com/raspberrypi/linux/archive/refs/heads/rpi-6.1.y.tar.gz \
     && tar --strip-components=1 --one-top-level=linux -xf linux.tar.gz \
     && cd linux \
     && make KERNEL=kernel7 ARCH=arm INSTALL_HDR_PATH=/opt/cross/arm-linux-gnueabihf headers_install
@@ -55,12 +56,8 @@ RUN cd /opt/cross-build/binutils-build && make -j$(nproc) && make install
 RUN cd /opt/cross-build \
     && (cd gcc-build && make -j$(nproc) all-gcc && make install-gcc)
 
-# Deploy patches for glibc
-COPY patches /opt/cross-build/patches
-
 #_Build glibc
 RUN cd /opt/cross-build/glibc-build \
-    && for PATCH in /opt/cross-build/patches/glibc-*.patch; do (cd ../glibc-${GLIBC_VERSION} && patch -p1 <$PATCH); done \
     && ../glibc-${GLIBC_VERSION}/configure --prefix=/opt/cross/arm-linux-gnueabihf --build=$MACHTYPE --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf --with-arch=armv6 --with-fpu=vfp --with-float=hard --with-headers=/opt/cross/arm-linux-gnueabihf/include --disable-multilib libc_cv_forced_unwind=yes \
     && make install-bootstrap-headers=yes install-headers \
     && make -j$(nproc) csu/subdir_lib \
@@ -126,10 +123,11 @@ COPY --from=build /opt/cross /opt/cross
 
 # These symbolic links fix linking to cross dependencies
 RUN ln -s /opt/cross/lib/arm-linux-gnueabihf /lib \
+    && rm -rf /usr/lib/arm-linux-gnueabihf \
     && ln -s /opt/cross/lib/arm-linux-gnueabihf /usr/lib \
     && ln -s /opt/cross/lib/ld-linux-armhf.so.3 /lib \
     # Fix pyo3 looking for _sysconfig in PYO3_CROSS_LIB_DIR
-    && ln -s /opt/cross/lib/python* /opt/cross/lib/arm-linux-gnueabihf
+    && ln -s /opt/cross/lib/python3.11 /opt/cross/lib/arm-linux-gnueabihf
 
 # Set the cross-compiler for Rust's target
 ENV CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc \
