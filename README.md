@@ -8,7 +8,7 @@ extra support needed for cross-compiling on unusual targets.
 
 Targets are defined in the [`targets`](targets/) folder. The currently defined targets are:
 
-* [`raspberrypi`](targets/raspberrypi): Raspberry Pi Zero/1 on Raspbian Bullseye
+* [`raspberrypi-bullseye`](targets/raspberrypi-bullseye): Raspberry Pi Zero/1 on Raspbian Bullseye
 
   *Rationale: arm-linux-gnueabihf toolchains are now configured by default to
   use ARMv7, which is only supported by Raspberry Pi 2 and later. This builds a
@@ -27,11 +27,11 @@ The images built by this repository are compatible with
 `Cross.toml` file referencing the image for your target as described below.
 Then, use `cross` as usual: `cross build --target <TARGET> ...`.
 
-### `raspberrypi`
+### `raspberrypi-bullseye`
 
 ```toml
 [target.arm-unknown-linux-gnueabihf]
-image = "vtavernier/cross:raspberrypi"
+image = "vtavernier/cross:raspberrypi-bullseye"
 ```
 
 ### `x86_64-bullseye`
