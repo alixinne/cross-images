@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+for SUFFIX in -build -target ""; do
+  $DOCKER push $REGISTRY/$IMAGE_BASE:$TARGET$SUFFIX
+done

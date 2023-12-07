@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+$DOCKER build --target build -t $REGISTRY/$IMAGE_BASE:$TARGET-build .
+$DOCKER build --target target -t $REGISTRY/$IMAGE_BASE:$TARGET-target .
+$DOCKER build -t $REGISTRY/$IMAGE_BASE:$TARGET .

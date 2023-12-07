@@ -8,12 +8,16 @@ extra support needed for cross-compiling on unusual targets.
 
 Targets are defined in the [`targets`](targets/) folder. The currently defined targets are:
 
-* [`raspberrypi-bullseye`](targets/raspberrypi-bullseye): Raspberry Pi Zero/1 on Raspbian Bullseye
+* [`raspberrypi-bookworm`](targets/raspberrypi-bookworm): Raspberry Pi Zero/1 on Raspbian Bookworm
 
   *Rationale: arm-linux-gnueabihf toolchains are now configured by default to
   use ARMv7, which is only supported by Raspberry Pi 2 and later. This builds a
   arm-linux-gnueabihf toolchain for ARMv6 so we can cross-compile Rust programs
   for those targets.*
+
+* [`raspberrypi-bullseye`](targets/raspberrypi-bullseye): Raspberry Pi Zero/1 on Raspbian Bullseye
+
+  *Rationale: same as above.*
 
 * [`x86_64-bullseye`](targets/x86_64-bullseye): x86_64 native compiler on Debian Bullseye
 
@@ -26,6 +30,13 @@ The images built by this repository are compatible with
 [cross](https://github.com/rust-embedded/cross). In order to use them, add a
 `Cross.toml` file referencing the image for your target as described below.
 Then, use `cross` as usual: `cross build --target <TARGET> ...`.
+
+### `raspberrypi-bookworm`
+
+```toml
+[target.arm-unknown-linux-gnueabihf]
+image = "vtavernier/cross:raspberrypi-bookworm"
+```
 
 ### `raspberrypi-bullseye`
 
