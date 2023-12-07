@@ -14,7 +14,7 @@ TARGET=arm-unknown-linux-gnueabihf
 #  We're using Python for this test
 export ENABLE_PYO3=1
 test_rust_git \
-	"git@github.com:vtavernier/blog-cross-rpi.git" \
+	"https://github.com/vtavernier/blog-cross-rpi.git@master" \
 	"blog-cross-rpi" \
 	"--all-features"
 

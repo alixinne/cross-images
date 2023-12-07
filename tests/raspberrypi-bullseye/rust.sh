@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -eu
 
@@ -8,7 +8,7 @@ cd "$SOURCE_BASE"
 . ../common.sh
 
 # Rust target
-TARGET=x86_64-unknown-linux-gnu
+TARGET=arm-unknown-linux-gnueabihf
 
 # C test
 #  We're using Python for this test

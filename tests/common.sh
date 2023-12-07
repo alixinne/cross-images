@@ -51,7 +51,9 @@ test_rust_git () {
   DIR="$(mktemp -d)"
 
   # Deploy source
-  git clone --depth=1 "$SOURCE" "$DIR"
+  REPOSITORY="$(cut -d@ -f1 <<< "$SOURCE")"
+  REVISION="$(cut -d@ -f2 <<< "$SOURCE")"
+  git clone --depth=1 -b "$REVISION" "$REPOSITORY" "$DIR"
 
   # Create Cross.toml file
   cat >"$DIR/Cross.toml" <<EOT
