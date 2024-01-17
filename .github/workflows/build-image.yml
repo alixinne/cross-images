@@ -37,6 +37,12 @@ jobs:
       - name: Build the image
         run: make docker-image-${{ inputs.image }}
 
+      - name: Install cargo-binstall
+        uses: cargo-bins/cargo-binstall@8befa3d6491e023b3676c07bf71a1680700e3e6e
+
+      - name: Install cross
+        run: cargo binstall --no-confirm cross@=0.2.5
+
       - name: Test the image
         run: make test-${{ inputs.image }}
 
