@@ -61,7 +61,7 @@ test_rust_git () {
 passthrough = ["ENABLE_PYO3"]
 
 [target.$TARGET]
-image = "vtavernier/cross:$TARGET_NAME"
+image = "ghcr.io/vtavernier/cross:$TARGET_NAME"
 EOT
 
   # Run compilation

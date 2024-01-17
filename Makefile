@@ -4,7 +4,7 @@ else
 	DOCKER=docker
 endif
 
-REGISTRY?=docker.io
+REGISTRY?=ghcr.io
 IMAGE_BASE=vtavernier/cross
 TARGETS=$(patsubst %,docker-image-%,$(patsubst targets/%,%,$(wildcard targets/*)))
 TEST_TARGETS=$(patsubst %,test-%,$(patsubst targets/%,%,$(wildcard targets/*)))

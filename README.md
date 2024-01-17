@@ -35,21 +35,21 @@ Then, use `cross` as usual: `cross build --target <TARGET> ...`.
 
 ```toml
 [target.arm-unknown-linux-gnueabihf]
-image = "vtavernier/cross:raspberrypi-bookworm"
+image = "ghcr.io/vtavernier/cross:raspberrypi-bookworm"
 ```
 
 ### `raspberrypi-bullseye`
 
 ```toml
 [target.arm-unknown-linux-gnueabihf]
-image = "vtavernier/cross:raspberrypi-bullseye"
+image = "ghcr.io/vtavernier/cross:raspberrypi-bullseye"
 ```
 
 ### `x86_64-bullseye`
 
 ```toml
 [target.x86_64-unknown-linux-gnu]
-image = "vtavernier/cross:x86_64-bullseye"
+image = "ghcr.io/vtavernier/cross:x86_64-bullseye"
 ```
 
 ## Dependencies

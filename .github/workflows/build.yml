@@ -20,4 +20,6 @@ jobs:
     with:
       image: ${{ matrix.image }}
 
-    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
