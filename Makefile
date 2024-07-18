@@ -5,7 +5,7 @@ else
 endif
 
 REGISTRY?=ghcr.io
-IMAGE_BASE=vtavernier/cross
+IMAGE_BASE=alixinne/cross
 TARGETS=$(patsubst %,docker-image-%,$(patsubst targets/%,%,$(wildcard targets/*)))
 TEST_TARGETS=$(patsubst %,test-%,$(patsubst targets/%,%,$(wildcard targets/*)))
 PUSH_TARGETS=$(patsubst %,push-%,$(patsubst targets/%,%,$(wildcard targets/*)))

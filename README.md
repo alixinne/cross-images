@@ -1,4 +1,4 @@
-# [cross-images](https://github.com/vtavernier/cross-images)
+# [cross-images](https://github.com/alixinne/cross-images)
 
 Docker images for cross-compiling Rust with native dependencies. This
 repository builds [rust](https://hub.docker.com/_/rust/)-based images with the
@@ -35,21 +35,21 @@ Then, use `cross` as usual: `cross build --target <TARGET> ...`.
 
 ```toml
 [target.arm-unknown-linux-gnueabihf]
-image = "ghcr.io/vtavernier/cross:raspberrypi-bookworm"
+image = "ghcr.io/alixinne/cross:raspberrypi-bookworm"
 ```
 
 ### `raspberrypi-bullseye`
 
 ```toml
 [target.arm-unknown-linux-gnueabihf]
-image = "ghcr.io/vtavernier/cross:raspberrypi-bullseye"
+image = "ghcr.io/alixinne/cross:raspberrypi-bullseye"
 ```
 
 ### `x86_64-bullseye`
 
 ```toml
 [target.x86_64-unknown-linux-gnu]
-image = "ghcr.io/vtavernier/cross:x86_64-bullseye"
+image = "ghcr.io/alixinne/cross:x86_64-bullseye"
 ```
 
 ## Dependencies
@@ -98,4 +98,4 @@ make test
 
 ## Author
 
-Vincent Tavernier <vince.tavernier@gmail.com>
+Alixinne <alixinne@pm.me>

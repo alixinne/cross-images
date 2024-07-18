@@ -29,7 +29,7 @@ test_c_prog () {
     -e ENABLE_PYO3 \
     -e SOURCE_IN \
     -e BINARY_OUT \
-    vtavernier/cross:$TARGET_NAME \
+    alixinne/cross:$TARGET_NAME \
     /bin/bash -c "$COMMAND"; then
       echo -e "\e[32mCompilation succeeded\e[0m" >&2
       mv "$DIR/$NAME" "$NAME-$TARGET_NAME"
@@ -61,7 +61,7 @@ test_rust_git () {
 passthrough = ["ENABLE_PYO3"]
 
 [target.$TARGET]
-image = "ghcr.io/vtavernier/cross:$TARGET_NAME"
+image = "ghcr.io/alixinne/cross:$TARGET_NAME"
 EOT
 
   # Run compilation
