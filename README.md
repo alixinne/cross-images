@@ -1,5 +1,9 @@
 # [cross-images](https://github.com/alixinne/cross-images)
 
+**Archived:** Balena does not provide the images the Raspberry Pi images rely
+on for fetching dependencies, so this setup does not work anymore for recent
+versions of Debian (Trixie and above).
+
 Docker images for cross-compiling Rust with native dependencies. This
 repository builds [rust](https://hub.docker.com/_/rust/)-based images with the
 extra support needed for cross-compiling on unusual targets.
